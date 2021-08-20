@@ -1,11 +1,17 @@
 <MyWidget>
+    id:my_widget
     GridLayout:
         cols:1
         size:root.width-200,root.height-200
         pos:100,100
+
         Button:
             text:"Add Document"
-            on_press:
-        Button:
-            text:"Create Document"
+            on_press:my_widget.findfile()
+
+        Image:
+            id:image
+            source:""
+
+
 
