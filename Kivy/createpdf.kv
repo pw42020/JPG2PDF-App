@@ -1,0 +1,60 @@
+WindowManager:
+    MenuScreen:
+        
+
+    DocumentsScreen:
+        
+
+<MenuScreen>:
+    name:"menu_screen"
+    BoxLayout:
+        orientation:"vertical"
+        MDToolbar:
+            title: "toolbar"
+            left_action_items:[["menu",lambda x: app.navigation_draw()]]
+        MDLabel:
+            text: "Hello world"
+            halign:"center"
+        GridLayout:
+            cols:1
+            size: root.width,root.height*0.2
+            Button:
+                text:"Add Document"
+                on_press:root.findfile()
+            Button:
+                text:"Documents"
+                on_press:
+                    root.manager.transition.direction="left"
+                    app.root.current="documents"
+
+<DocumentsScreen>:
+    name:"documents"
+    canvas.before:
+        Color:
+            rgba:(0,0,0,1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    GridLayout:
+        cols:1
+        size:root.width,root.height
+        FileChooserIconView:
+            
+            name:"filechooser"
+            path:r"C:\Users\Ninja\OneDrive\Documents\GitHub\App\Documents"
+            
+        Label:
+            text:"Documents"
+        Button:
+            text:"Go back"
+            on_press:
+                root.manager.transition.direction="right"
+                app.root.current="menu_screen"
+
+
+        
+
+        
+
+
+
