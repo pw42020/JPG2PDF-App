@@ -1,34 +1,57 @@
-WindowManager:
-    MenuScreen:
-        
+Screen:
+    MDNavigationLayout:
+        WindowManager:
+            MenuScreen:
+                BoxLayout:
+                    orientation:"vertical"
+                    MDToolbar:
+                        title: "toolbar"
+                        left_action_items:[["menu",lambda x: nav_drawer.set_state("open")]]
+                        right_action_items:[["dots-vertical",lambda x: app.callback(x)]]
+                        elevation: 8
+                    FileChooserIconView:
+                        id:filechooser
+                        path:r"C:\Users\Ninja\OneDrive\Documents\GitHub\App\Documents"
+                    
 
-    DocumentsScreen:
+            DocumentsScreen:
+
+        MDNavigationDrawer:
+            id:nav_drawer
+            ContentNavigationDrawer:
+
+<ContentNavigationDrawer>:
+    orientation:"vertical"
+    padding:"8dp"
+    spacing:"8dp"
+    ScrollView:
+        DrawerList:
+            id:md_list
         
+<ItemDrawer>:
+    theme_text_color: "Custom"
+    on_release: self.parent.set_color_item(self)
+
+    IconLeftWidget:
+        id: icon
+        icon: root.icon
+        theme_text_color: "Custom"
+        text_color: root.text_color
+
 
 <MenuScreen>:
     name:"menu_screen"
-    BoxLayout:
-        orientation:"vertical"
-        MDToolbar:
-            title: "toolbar"
-            left_action_items:[["menu",lambda x: app.navigation_draw()]]
-        MDLabel:
-            text: "Hello world"
-            halign:"center"
-        GridLayout:
-            cols:1
-            size: root.width,root.height*0.2
-            Button:
-                text:"Add Document"
-                on_press:root.findfile()
-            Button:
-                text:"Documents"
-                on_press:
-                    root.manager.transition.direction="left"
-                    app.root.current="documents"
+    canvas.before:
+        Color:
+            rgba:(35/255,35/255,35/255,1)
+        Rectangle:
+            pos:self.pos
+            size:self.size
+    
 
 <DocumentsScreen>:
     name:"documents"
+    size:100,root.height
     canvas.before:
         Color:
             rgba:(0,0,0,1)
