@@ -18,6 +18,12 @@ Screen:
                     elevation:8
                     on_release: app.menu.open()
                     
+            BookmarkScreen: 
+                BoxLayout:
+                    orientation: "vertical"
+                    MDLabel:
+                        text:"Bookmarks"
+                    
 
         MDNavigationDrawer:
             id:nav_drawer
@@ -50,11 +56,20 @@ Screen:
                                 text:"Profile"
                                 IconLeftWidget:
                                     icon:"face-profile"
+  
                             OneLineIconListItem:
+                                on_release:
+                                    root.Screen.current="menu_screen"
+                                    nav_drawer.set_state("closed")
                                 text:"Documents"
                                 IconLeftWidget:
                                     icon:"folder"
+                                
+                                
                             OneLineIconListItem:
+                                on_release:
+                                    root.Screen.current="bookmarks"
+                                    nav_drawer.set_state("closed")
                                 text:"Bookmarked"
                                 IconLeftWidget:
                                     icon:"bookmark"
@@ -73,9 +88,27 @@ Screen:
         Rectangle:
             pos:self.pos
             size:self.size
-    
+
+<BookmarkScreen>
+    name:"bookmarks"
+    canvas.before:
+        Color:
+            rgba:(35/255,35/255,35/255,1)
+        Rectangle:
+            pos:self.pos
+            size:self.size
 
 
+<PDFNameCheck>:
+    orientation: "vertical"
+    size_hint:0.8,0.8
+    spacing:"12dp"
+    height:"60dp"
+
+    MDTextField:
+        id:pdfname
+        text_hint:"PDF Name"
+        
 
         
 
