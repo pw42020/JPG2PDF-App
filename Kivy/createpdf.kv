@@ -1,6 +1,9 @@
 Screen:
     MDNavigationLayout:
+
+
         WindowManager:
+            id:screen_manager
             MenuScreen:
                 BoxLayout:
                     orientation:"vertical"
@@ -16,13 +19,40 @@ Screen:
                     id:plus
                     icon:"plus"
                     elevation:8
-                    on_release: app.menu.open()
+                    on_release: 
+                        app.generatepdf()
+                        screen_manager.current="pdf_name_check"
                     
             BookmarkScreen: 
                 BoxLayout:
                     orientation: "vertical"
                     MDLabel:
                         text:"Bookmarks"
+            PDFNameCheck:
+                name:"pdf_name_check"
+                pdfname:pdfname
+                BoxLayout:
+                    orientation: "vertical"
+                    size_hint:0.8,0.8
+                    spacing:"12dp"
+                    height:"60dp"
+                    text:pdfname.text
+                    
+                    
+                    MDTextField:
+                        id:pdfname
+                        hint_text:"PDF Name"
+                        pos_hint:{"center_x":0.5,"center_y":0.5}
+                    GridLayout:
+                        cols:2
+                        MDRectangleFlatButton:
+                            text:"Cancel"
+                        MDRectangleFlatButton:
+                            text:"OK"
+                            on_release:
+                                screen_manager.current="menu_screen"
+                                app.generatepdfp2()
+                    Widget:
                     
 
         MDNavigationDrawer:
@@ -97,17 +127,8 @@ Screen:
         Rectangle:
             pos:self.pos
             size:self.size
+    
 
-
-<PDFNameCheck>:
-    orientation: "vertical"
-    size_hint:0.8,0.8
-    spacing:"12dp"
-    height:"60dp"
-
-    MDTextField:
-        id:pdfname
-        text_hint:"PDF Name"
         
 
         
