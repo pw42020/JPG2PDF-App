@@ -19,7 +19,6 @@ from shutil import copy,move
 from reportlab.lib.pagesizes import letter
 
 
-Window.size=(300,500) ######MAKE SURE TO REMOVE LATER ######
 
 
 class MenuScreen(Screen):
